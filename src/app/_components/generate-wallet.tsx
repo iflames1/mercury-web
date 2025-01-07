@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle } from "lucide-react";
-// import SeedPhrase from "./seed-phrase";
 import { useState } from "react";
 import { generateWallet, generateSecretKey, Wallet } from "@stacks/wallet-sdk";
 import { getAddressFromPrivateKey } from "@stacks/transactions";
@@ -39,7 +38,7 @@ export default function GenerateWallet() {
 			const secretKey = generateSecretKey(128);
 			const wallet: Wallet = await generateWallet({
 				secretKey,
-				password: "", // Empty password for this example
+				password: "",
 			});
 			const account1 = wallet.accounts[0];
 			const mainnetAddress = getAddressFromPrivateKey(account1.stxPrivateKey);

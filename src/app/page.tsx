@@ -1,7 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Login from "./_components/login";
+import { getWalletCookie } from "./actions";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+	const walletData = await getWalletCookie();
+
+	if (walletData?.walletAddress) {
+		redirect(`/${walletData?.walletAddress}`);
+	}
+
 	return (
 		<div className="min-h-screen bg-background p-6">
 			<Card className="max-w-2xl mx-auto">

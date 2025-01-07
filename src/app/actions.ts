@@ -2,8 +2,7 @@
 import { cookies } from "next/headers";
 import { encrypt, decrypt } from "@/utils/encryption";
 import { WalletData } from "@/types/wallet";
-const ENCRYPTION_KEY =
-	process.env.ENCRYPTION_KEY || "default-secure-key-min-32-chars-long!!!"; // Store in .env
+import { ENCRYPTION_KEY } from "@/lib/constants";
 
 const WALLET_COOKIE = "walletData";
 
