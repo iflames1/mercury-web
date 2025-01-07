@@ -25,6 +25,7 @@ import { useState } from "react";
 import { generateWallet, generateSecretKey, Wallet } from "@stacks/wallet-sdk";
 import { getAddressFromPrivateKey } from "@stacks/transactions";
 import SeedPhrase from "./seed-phrases";
+import { Label } from "@/components/ui/label";
 
 export default function GenerateWallet() {
 	const [isGenerating, setIsGenerating] = useState(false);
@@ -53,6 +54,9 @@ export default function GenerateWallet() {
 
 	return (
 		<div className="space-y-2">
+			<Label className="text-muted-foreground">
+				Create a new wallet for Mercury
+			</Label>
 			<AlertDialog>
 				<AlertDialogTrigger asChild>
 					<Button
@@ -119,9 +123,6 @@ export default function GenerateWallet() {
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
-			<p className="text-sm text-muted-foreground px-2">
-				Create a new wallet for Mercury
-			</p>
 		</div>
 	);
 }

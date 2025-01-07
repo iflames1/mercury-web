@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { createWalletCookie } from "../actions";
 
 interface SeedPhraseProps {
 	seedPhrase: string;
@@ -30,7 +31,20 @@ export default function SeedPhrase({
 	};
 
 	const setCookie = async () => {
-		console.log(stxPrivateKey, walletAddress);
+		try {
+			const result = await createWalletCookie(stxPrivateKey, walletAddress);
+			if (result.success) {
+				router.replace(walletAddress);
+			} else {
+				toast.error("Something went wrong, please try again later", {
+					duration: 2000,
+				});
+				console.log(result.error);
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error("Error storing wallet data");
+		}
 	};
 
 	if (isGenerating) {
