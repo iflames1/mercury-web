@@ -45,7 +45,7 @@ export default function StxCityBuy({
 	balance,
 	walletData,
 }: StxCityBuyProps) {
-	const stxBal = (Number(balance.stx.balance) / 1_000_000).toString();
+	const stxBal = Number(balance.stx.balance) / 1_000_000;
 	const [stxPrice, setStxPrice] = useState("0.00001");
 	const [slippage, setSlippage] = useState(INITIAL_SLIPPAGE);
 	const [buyableAmount, setBuyableAmount] = useState("0");

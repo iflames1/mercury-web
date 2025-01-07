@@ -21,6 +21,7 @@ import { useState } from "react";
 import { AccountBalance } from "@/types/balance";
 import StxCityBuy from "./buy";
 import { truncateContract } from "@/utils/truncate";
+import StxCitySell from "./sell";
 
 interface ItemStatProps {
 	icon: React.ElementType;
@@ -160,11 +161,11 @@ export default function StxCityTab({
 								balance={balanceData}
 								walletData={walletData}
 							/>
-							{/* <StxCitySell */}
-							{/*   token={token} */}
-							{/*   balance={balanceData} */}
-							{/*   walletData={walletData} */}
-							{/* /> */}
+							<StxCitySell
+								token={token}
+								balance={balanceData}
+								walletData={walletData}
+							/>
 						</Tabs>
 					</CardFooter>
 				)}

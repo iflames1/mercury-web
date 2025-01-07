@@ -6,12 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Image from "next/image";
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,6 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Token } from "@/types/token";
 import { TabsContent } from "@/components/ui/tabs";
+import { Loader } from "lucide-react";
 
 const createFormSchema = (balance: string) =>
 	z.object({
@@ -172,7 +168,14 @@ export function Transfer({ tokenData }: TransferProps) {
 								</div>
 								<p className="font-medium">0.001 STX</p>
 							</div>
-							<Button type="submit" className="w-full">
+							<Button
+								type="submit"
+								className="w-full gap-3"
+								disabled={form.formState.isSubmitting}
+							>
+								{form.formState.isSubmitting && (
+									<Loader className="animate-spin" size={17} />
+								)}
 								{form.formState.isSubmitting ? "Processing..." : "Transfer"}
 							</Button>
 						</form>
