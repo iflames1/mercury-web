@@ -36,7 +36,7 @@ export default function ImportWallet() {
 		try {
 			const wallet: Wallet = await generateWallet({
 				secretKey,
-				password: "", // Empty password for this example
+				password: "",
 			});
 			const account1 = wallet.accounts[0];
 			const stxPrivateKey = account1.stxPrivateKey;

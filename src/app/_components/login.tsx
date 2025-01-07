@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import TermsCondition from "./terms-and-conditions";
-import { Button } from "@/components/ui/button";
 import GenerateWallet from "./generate-wallet";
 import ImportWallet from "./import-wallet";
 
