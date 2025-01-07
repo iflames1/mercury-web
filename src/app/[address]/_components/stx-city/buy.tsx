@@ -19,7 +19,8 @@ import {
 } from "@stacks/transactions";
 import { getBuyableTokens } from "@/lib/contract-calls/stxcity";
 import { decrypt } from "@/utils/encryption";
-import { ENCRYPTION_KEY } from "@/lib/constants";
+import { ENCRYPTION_KEY, EXPLORER_BASE_URL } from "@/lib/constants";
+import { toast } from "sonner";
 
 interface StxCityBuyProps {
 	token: StxCityTokenInfo;
@@ -158,8 +159,27 @@ export default function StxCityBuy({
 				transaction: tx,
 				network: "mainnet",
 			});
-			setTxID(res.txid);
-			console.log("Transaction broadcast", res);
+			if ("reason" in res) {
+				toast.error(res.reason, {
+					richColors: true,
+				});
+			} else {
+				console.log("Transaction broadcast success:", res.txid);
+				setTxID(res.txid);
+				toast.success("Transaction Broadcasted", {
+					richColors: true,
+					action: (
+						<Button asChild>
+							<a
+								href={`${EXPLORER_BASE_URL}/txid/${res.txid}?chain=mainnet`}
+								target="_blank"
+							>
+								Open In Explorer
+							</a>
+						</Button>
+					),
+				});
+			}
 		} catch (err) {
 			console.error("Error in handleBuy:", err);
 		} finally {

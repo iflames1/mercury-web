@@ -18,6 +18,8 @@ import {
 	SignedContractCallOptions,
 } from "@stacks/transactions";
 import { getSellableTokens } from "@/lib/contract-calls/stxcity";
+import { toast } from "sonner";
+import { EXPLORER_BASE_URL } from "@/lib/constants";
 
 interface StxCitySellProps {
 	token: StxCityTokenInfo;
@@ -27,10 +29,11 @@ interface StxCitySellProps {
 
 const INITIAL_SLIPPAGE = "0.5";
 const PERCENTAGE_OPTIONS = [
-	{ value: "25", display: "25%" },
-	{ value: "50", display: "50%" },
-	{ value: "75", display: "75%" },
-	{ value: "100", display: "100%" },
+	{ value: "10" },
+	{ value: "25" },
+	{ value: "50" },
+	{ value: "75" },
+	{ value: "100" },
 ];
 const DECIMAL_REGEX = /^\d*\.?\d*$/;
 const SLIPPAGE_REGEX = /^\d*\.?\d{0,2}$/;
@@ -181,8 +184,27 @@ export default function StxCitySell({
 				transaction: tx,
 				network: "mainnet",
 			});
-			setTxID(res.txid);
-			console.log("Transaction broadcast", res);
+			if ("reason" in res) {
+				toast.error(res.reason, {
+					richColors: true,
+				});
+			} else {
+				console.log("Transaction broadcast success:", res.txid);
+				setTxID(res.txid);
+				toast.success("Transaction Broadcasted", {
+					richColors: true,
+					action: (
+						<Button asChild>
+							<a
+								href={`${EXPLORER_BASE_URL}/txid/${res.txid}?chain=mainnet`}
+								target="_blank"
+							>
+								Open In Explorer
+							</a>
+						</Button>
+					),
+				});
+			}
 		} catch (err) {
 			console.error("Error in handleSell:", err);
 		} finally {
@@ -237,9 +259,10 @@ export default function StxCitySell({
 					<Button
 						key={option.value}
 						variant="secondary"
+						className="w-full"
 						onClick={() => handlePercentageSelect(option.value)}
 					>
-						{option.display}
+						{option.value} %
 					</Button>
 				))}
 			</div>
