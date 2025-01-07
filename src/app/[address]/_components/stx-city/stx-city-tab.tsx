@@ -58,7 +58,7 @@ export default function StxCityTab({
 	}
 
 	return (
-		<div className="mt-5 flex flex-col">
+		<TabsContent value="stxcity" className="mt-3">
 			<Card>
 				<CardHeader>
 					<div className="flex gap-4 items-center">
@@ -169,6 +169,6 @@ export default function StxCityTab({
 					</CardFooter>
 				)}
 			</Card>
-		</div>
+		</TabsContent>
 	);
 }
