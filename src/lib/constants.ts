@@ -6,3 +6,5 @@ export const EXPLORER_BASE_URL = "https://explorer.hiro.so/";
 export const VELAR_API_BASE_URL = "https://api.velar.co/";
 export const STX_CITY_API_BASE_URL = "https://stx.city/api/";
 export const API_BASE_URL = "https://53d2-102-88-109-213.ngrok-free.app/";
+export const ENCRYPTION_KEY =
+	process.env.ENCRYPTION_KEY || "default-secure-key-min-32-chars-long!!!"; // Store in .env
