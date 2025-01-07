@@ -3,8 +3,9 @@ import React from "react";
 import { getWalletCookie } from "../actions";
 import { redirect } from "next/navigation";
 import { getSTXBalance, getTokenBalances } from "@/queries/balance";
-import WalletAddress from "./_components/wallet-balance";
+import WalletAddress from "./_components/wallet-address";
 import TokenList from "./_components/token-list";
+import { AccountBalance } from "@/types/balance";
 
 export default async function DashboardPage({
 	params,
@@ -41,7 +42,7 @@ export default async function DashboardPage({
 				<TokenList
 					tokens={tokens}
 					walletData={walletData}
-					balanceData={balanceData}
+					balanceData={balanceData as AccountBalance}
 				/>
 			</div>
 		</div>

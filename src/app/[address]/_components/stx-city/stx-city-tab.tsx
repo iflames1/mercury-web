@@ -21,6 +21,7 @@ import { useState } from "react";
 import { AccountBalance } from "@/types/balance";
 import StxCityBuy from "./buy";
 import { truncateContract } from "@/utils/truncate";
+import StxCitySell from "./sell";
 
 interface ItemStatProps {
 	icon: React.ElementType;
@@ -58,7 +59,7 @@ export default function StxCityTab({
 	}
 
 	return (
-		<div className="mt-5 flex flex-col">
+		<TabsContent value="stxcity" className="mt-3">
 			<Card>
 				<CardHeader>
 					<div className="flex gap-4 items-center">
@@ -160,15 +161,15 @@ export default function StxCityTab({
 								balance={balanceData}
 								walletData={walletData}
 							/>
-							{/* <StxCitySell */}
-							{/*   token={token} */}
-							{/*   balance={balanceData} */}
-							{/*   walletData={walletData} */}
-							{/* /> */}
+							<StxCitySell
+								token={token}
+								balance={balanceData}
+								walletData={walletData}
+							/>
 						</Tabs>
 					</CardFooter>
 				)}
 			</Card>
-		</div>
+		</TabsContent>
 	);
 }
