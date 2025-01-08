@@ -4,7 +4,7 @@ export interface Token {
 	balance: string;
 	worth: number;
 	image: string;
-	stxcity?: StxCityTokenInfo;
+	stxcity?: StxCityTokenInfo | null;
 }
 export interface TokenMetadata {
 	image_uri: string;
@@ -42,5 +42,5 @@ export type StxCityTokenInfo = {
 export type StxCityTokenData = {
 	ads_tokens?: StxCityTokenInfo[];
 	bonding_curve?: StxCityTokenInfo[];
-	normal: any[];
+	normal: StxCityTokenInfo[];
 };
