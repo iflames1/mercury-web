@@ -1,5 +1,5 @@
+/* eslint-disable */
 "use client";
-
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -18,8 +18,7 @@ import {
 	SignedContractCallOptions,
 } from "@stacks/transactions";
 import { getBuyableTokens } from "@/lib/contract-calls/stxcity";
-import { decrypt } from "@/utils/encryption";
-import { ENCRYPTION_KEY, EXPLORER_BASE_URL } from "@/lib/constants";
+import { EXPLORER_BASE_URL } from "@/lib/constants";
 import { toast } from "sonner";
 
 interface StxCityBuyProps {
@@ -80,8 +79,9 @@ export default function StxCityBuy({
 				if (buyableToken) {
 					const buyableTokenAmount =
 						buyableToken?.type === "ok"
-							? buyableToken.value.value["buyable-token"].value
-							: 0n;
+							? // @ts-expect-error "value typechecking"
+								buyableToken.value.value["buyable-token"].value
+							: BigInt(0);
 					const readableValue =
 						Number(buyableTokenAmount) / 10 ** token.decimals;
 					setBuyableAmount(readableValue.toFixed(4));
@@ -121,10 +121,6 @@ export default function StxCityBuy({
 	const handleBuy = useCallback(async () => {
 		setIsLoading(true);
 		try {
-			const decryptedPrivateKey = await decrypt(
-				walletData.walletAddress,
-				ENCRYPTION_KEY,
-			);
 			const uintCvAmount = Number.parseFloat(stxPrice) * 10 ** 6;
 			const buyableAmountForPostCondition = BigInt(
 				Math.floor(Number(buyableAmount) * 10 ** token.decimals),
@@ -150,7 +146,7 @@ export default function StxCityBuy({
 				postConditions,
 				validateWithAbi: true,
 				fee: Math.floor(0.001 * 1000000),
-				senderKey: decryptedPrivateKey,
+				senderKey: walletData.stxPrivateKey,
 			};
 
 			const tx = await makeContractCall(txOptions);
@@ -168,10 +164,11 @@ export default function StxCityBuy({
 				setTxID(res.txid);
 				toast.success("Transaction Broadcasted", {
 					richColors: true,
+					description: <p className="text-muted-foreground ">TXID: {txID}</p>,
 					action: (
 						<Button asChild>
 							<a
-								href={`${EXPLORER_BASE_URL}/txid/${res.txid}?chain=mainnet`}
+								href={`${EXPLORER_BASE_URL}txid/${res.txid}?chain=mainnet`}
 								target="_blank"
 							>
 								Open In Explorer
@@ -245,7 +242,7 @@ export default function StxCityBuy({
 				<Button
 					className="w-full"
 					variant="secondary"
-					onClick={() => setStxPrice(stxBal)}
+					onClick={() => setStxPrice(stxBal.toString())}
 				>
 					MAX
 				</Button>

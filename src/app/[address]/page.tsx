@@ -6,7 +6,6 @@ import { getSTXBalance, getTokenBalances } from "@/queries/balance";
 import WalletAddress from "./_components/wallet-address";
 import TokenList from "./_components/token-list";
 import { AccountBalance } from "@/types/balance";
-
 export default async function DashboardPage({
 	params,
 }: {
@@ -16,8 +15,7 @@ export default async function DashboardPage({
 	const walletData = await getWalletCookie();
 	const balanceData = await getSTXBalance(address);
 	const stxBalance = Number(balanceData?.stx.balance) / 1_000_000;
-	const tokens = await getTokenBalances(walletData?.walletAddress);
-	console.log(tokens);
+	const tokens = await getTokenBalances(walletData?.walletAddress as string);
 
 	if (!walletData || walletData.walletAddress !== address) {
 		redirect("/");

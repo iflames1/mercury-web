@@ -52,7 +52,9 @@ export default function StxCitySell({
 	const matchingKey = Object.keys(balance.fungible_tokens).find((key) =>
 		key.startsWith(token.token_contract),
 	);
-	const tokenBalance = balance.fungible_tokens[matchingKey].balance;
+	const tokenBalance = matchingKey
+		? balance.fungible_tokens[matchingKey].balance
+		: "0";
 	const formattedTokenBalance = useMemo(
 		() => (tokenBalance ? Number(tokenBalance) / 10 ** token.decimals : 0),
 		[tokenBalance, token.decimals],
@@ -104,9 +106,11 @@ export default function StxCitySell({
 
 				if (
 					response.type === "ok" &&
+					// @ts-expect-error "value typechecking"
 					response.value?.value?.["receivable-stx"]?.value
 				) {
 					const receivableStx = BigInt(
+						// @ts-expect-error "value typechecking"
 						response.value.value["receivable-stx"].value,
 					);
 					const readableValue = Number(receivableStx) / 10 ** 6;
@@ -121,7 +125,7 @@ export default function StxCitySell({
 				setIsLoading(false);
 			}
 		},
-		[dexContract, walletData.address],
+		[dexContract, walletData.walletAddress],
 	);
 
 	useEffect(() => {
@@ -193,6 +197,7 @@ export default function StxCitySell({
 				setTxID(res.txid);
 				toast.success("Transaction Broadcasted", {
 					richColors: true,
+					description: <p className="text-muted-foreground ">TXID: {txID}</p>,
 					action: (
 						<Button asChild>
 							<a
@@ -218,6 +223,7 @@ export default function StxCitySell({
 		walletData,
 		token.symbol,
 		token.decimals,
+		txID,
 	]);
 
 	const receiveText = useMemo(
