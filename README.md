@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mercury
+##### Use light mode for better experience 
+
+Mercury is a mobile trading application built with Expo React Native for the Stacks (STX) blockchain ecosystem. It provides essential wallet management and token transaction features in a user-friendly interface.
+
+## Features
+
+### Wallet Management
+
+- **Wallet Generation**: Create new secure STX wallets within the app
+- **Wallet Import**: Import existing wallets using standard recovery methods
+- **Multi-wallet Support**: Manage multiple STX wallets in one place
+- **QRCODE**: Get a qrcode for your address and feature to scan others qrcodes to send them tokens/stx.
+
+### Token Operations
+
+- **Token Details**: View comprehensive information about your tokens including:
+  - Current balance
+  - Token metadata
+  - Price information in USD(options to change is coming soon)
+- **Token Transfers**: Send tokens to other addresses with ease
+- **Transaction History**: Track all token-related transactions with detailed information
+- **Buy token directly from DEXES**: Ability to buy tokens in stx.city if its listed there
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (14.0 or higher) (bun)
+- Expo CLI
+- Android Emulator for development
+
+### Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/adeyemialameen04/mercury
+cd mercury
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Prebuild
 
-## Learn More
+```bash
+bun preb
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the development server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+bun dev:android
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development Stack
 
-## Deploy on Vercel
+- **Framework**: NextJs
+- **Blockchain**: Stacks (STX)
+- **State Management**: [react-cntext-api, zustand, cookies]
+- **UI Components**: [shadcnui, tailwind]
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Other links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Roadmap
+
+- [ ] Implement Token Snipping feature.
+- [ ] Copy Trades
+- [ ] Implement token swapping functionality
+- [ ] Add support for NFTs
+- [ ] Integrate with popular DEXes
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Contact
+
