@@ -1,4 +1,4 @@
-# Mercury
+# Mercury Web
 ##### Use light mode for better experience 
 
 Mercury is a mobile trading application built with Expo React Native for the Stacks (STX) blockchain ecosystem. It provides essential wallet management and token transaction features in a user-friendly interface.
@@ -27,16 +27,14 @@ Mercury is a mobile trading application built with Expo React Native for the Sta
 ### Prerequisites
 
 - Node.js (14.0 or higher) (bun)
-- Expo CLI
-- Android Emulator for development
 
 ### Installation
 
 1. Clone the repository
 
 ```bash
-git clone https://github.com/adeyemialameen04/mercury
-cd mercury
+git clone https://github.com/iflames1/mercury-web.git
+cd mercury-web
 ```
 
 2. Install dependencies
@@ -45,16 +43,10 @@ cd mercury
 bun install
 ```
 
-3. Prebuild
+3. Start the development server
 
 ```bash
-bun preb
-```
-
-4. Start the development server
-
-```bash
-bun dev:android
+bun next dev
 ```
 
 ## Development Stack
@@ -65,7 +57,7 @@ bun dev:android
 - **UI Components**: [shadcnui, tailwind]
 
 ## Other links
-
+[Android App](https://github.com/adeyemialameen04/mercury/)
 
 ## Roadmap
 
@@ -78,6 +70,3 @@ bun dev:android
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Contact
-
