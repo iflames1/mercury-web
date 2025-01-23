@@ -1,7 +1,7 @@
 # Mercury Web
 ##### Use light mode for better experience 
 
-Mercury is a mobile trading application built with Expo React Native for the Stacks (STX) blockchain ecosystem. It provides essential wallet management and token transaction features in a user-friendly interface.
+Mercury is a mobile trading application and web built with Expo React Native for the Stacks (STX) blockchain ecosystem. It provides essential wallet management and token transaction features in a user-friendly interface.
 
 ## Features
 
